@@ -52,7 +52,7 @@
 
 
 
-### 一、配置 debian（Gateway）
+### 一、配置 Debian（Gateway）
 
 #### VirtualBox 的虚拟网络配置
 
@@ -104,11 +104,11 @@ ps aux | grep dnsm
 tail -F /var/log/dnsmasq.log
 ```
 
-![image-20220912200543928](C:\Users\ASUS\Desktop\2022-ns-public-excuses0217\chap0x01\img\dns_log.png)
+![dns_log](img/dns_log.png)
 
 
 
-### 二、配置 Windows xp（Victim）
+### 二、配置 Windows XP（Victim）
 
 #### VirtualBox 的虚拟网络配置
 
@@ -144,7 +144,7 @@ tail -F /var/log/dnsmasq.log
 
 
 
-### 三、配置 kali（Victim）
+### 三、配置 Kali（Victim）
 
 #### VirtualBox 的虚拟网络配置
 
@@ -163,7 +163,7 @@ tail -F /var/log/dnsmasq.log
 
 
 
-### 四、配置 kali（Attacker）
+### 四、配置 Kali（Attacker）
 
 #### VirtualBox 的虚拟网络配置
 
