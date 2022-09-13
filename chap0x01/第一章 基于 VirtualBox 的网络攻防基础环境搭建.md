@@ -52,7 +52,20 @@
 
 
 
-### 一、配置 Debian（Gateway）
+### 一、配置虚拟硬盘多重加载
+
+- `Virtualbox 虚拟机管理`->`虚拟介质管理`
+- 选中需要改变类型的虚拟硬盘，先将其`释放`，然后将其`属性`->`类型`选为多重加载
+
+![vdiskset](img/vdiskset.png)
+
+需要添加多重加载的虚拟硬盘时，选中虚拟机设置，添加虚拟硬盘即可
+
+![addvdi](img/addvdi.png)
+
+
+
+### 二、配置 Debian（Gateway）
 
 #### VirtualBox 的虚拟网络配置
 
@@ -108,7 +121,7 @@ tail -F /var/log/dnsmasq.log
 
 
 
-### 二、配置 Windows XP（Victim）
+### 三、配置 Windows XP（Victim）
 
 #### VirtualBox 的虚拟网络配置
 
@@ -144,7 +157,7 @@ tail -F /var/log/dnsmasq.log
 
 
 
-### 三、配置 Kali（Victim）
+### 四、配置 Kali（Victim）
 
 #### VirtualBox 的虚拟网络配置
 
@@ -163,7 +176,7 @@ tail -F /var/log/dnsmasq.log
 
 
 
-### 四、配置 Kali（Attacker）
+### 五、配置 Kali（Attacker）
 
 #### VirtualBox 的虚拟网络配置
 
@@ -189,7 +202,7 @@ tail -F /var/log/dnsmasq.log
 
 
 
-### 五、网关网络流量监测
+### 六、网关网络流量监测
 
 #### 抓包实验
 
@@ -223,50 +236,20 @@ scp root@192.168.56.113:/root/workspace20220912.1.pcap ./
 
 
 
+## 遇到的问题及解决方法
+
+- Windows XP（Victim） 靶机可以单向连通网关，而网关尝试 ping 时无法成功：
+
+  ping 是通过发送 ICMP echo request 实现网络连通性检测，而 Windows 防火墙会拦截过滤外部的 request，因此需要关闭 Windows XP（Victim）的防火墙。
+
+- 配置多重加载时发现无法改变类型
+
+  查阅资料后得知，需要配置一台带有硬盘的虚拟机，随后将其释放，以此硬盘为基础才可进行多重加载。
+
+
+
 ## 参考资料
 
 - [VirtualBox Network Settings: Complete Guide](https://www.nakivo.com/blog/virtualbox-network-setting-guide/#:~:text=Network%20Modes%20section.-,NAT%20Network,external%20networks%20including%20the%20internet.)
 - [Virtualbox 中 Nat 和 Nat Network 模式区别](https://www.zhihu.com/question/277077127)
 - [网络安全电子书 黄玮](https://c4pr1c3.github.io/cuc-ns/)
-
-
-
-## 课后思考题
-
-以下⾏为分别破坏了CIA和AAA中哪⼀个属性或多个属性？
-
-- 小明抄小强的作业
-- 小明把小强的系统折腾死机了
-- 小明修改了小强的淘宝订单
-- 小明冒充小强的信用卡账单签名
-- 小明把自⼰电脑的IP修改为小强电脑的IP，导致小强的电脑⽆法上⽹
-
-
-
-有⼀次，小明⼝袋里有100元，因为打瞌睡，被小偷偷⾛了，搞得晚上没饭吃。又⼀天，小明⼝袋里有200元，这次小明为了防范小偷，不打瞌睡了，但却被强盗持⼑威胁抢⾛了，搞得⼀天没饭吃，小明当天就报警了。
-
-- 试分析两次失窃事件中的：风险、资产、威胁、弱点、攻击、影响
-- 试用P2DR模型分析以上案例中的“现⾦被抢”事件中的安全策略、安全防护、安全检测和安全响应
-- “被抢”事件中，小明的安全策略存在何问题？
-
-
-
-针对下述论点，分别设计⼀场景案例（必须和课程相关），使得该论点在该场景中成立
-
-- 预防比检测和恢复更重要
-- 检测比预防和恢复更重要
-- 恢复比预防和检测更重要
-
-
-
-试分析“CAPTCHA图片验证码技术可以阻⽌恶意批量注册⾏为”这句话中的安全策略、安全机制和安全假设分别是什么？CAPTCHA图片举例
-
-![img](https://c4pr1c3.github.io/cuc-ns-ppt/images/chap0x01/captcha-demo.jpg)
-
-
-
-某⼤型软件开发公司的总裁担⼼公司的专利软件设计⽅法被内部员⼯泄露给其他公司，他打算防⽌泄密事件的发⽣。于是他设计了这样⼀个安全机制： **所有员⼯必须每天向他汇报自⼰和其他竞争对⼿公司员⼯的所有联系(包括IM、电⼦邮件、电话等等)** 。你认为该安全机制能达到总裁的预期安全效果吗？为什么？
-
-
-
-请列举你经常使用的互联⽹服务有哪些，通过公开渠道检索这些服务提供商在历史上是否经历过安全事件？据此，撰写⼀篇主题为：《某某互联⽹服务安全问题概要》的调研报告。
